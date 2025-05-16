@@ -31,7 +31,7 @@ public class EventTypeClassifier {
                 You need to classify an event into one of these categories:
                 - PHYSICAL_ACTIVITY
                 - CHILL
-                - SELF_IMPROVEMENT
+                - HOBBY
                 - WORK
                 - SOCIAL_ACTIVITY
                 - OTHER
