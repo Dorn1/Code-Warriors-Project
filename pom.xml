@@ -28,12 +28,16 @@
     </scm>
     <properties>
         <java.version>24</java.version>
-        <spring.ai.version>1.0.0-RC1</spring.ai.version>
+        <spring.ai.version>1.0.0-M6</spring.ai.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId> <!-- For servlet-based web apps -->
         </dependency>
 
         <dependency>
@@ -48,8 +52,10 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-starter-model-openai</artifactId>
+            <artifactId>spring-ai-ollama-spring-boot-starter</artifactId>
+            <version>1.0.0-M6</version>
         </dependency>
+
     </dependencies>
     <dependencyManagement>
         <dependencies>
