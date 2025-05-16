@@ -32,4 +32,10 @@ public class AppUserService {
     public Long getUserId(String username) {
         return userRepository.findByUsername(username).getFirst().getId();
     }
+    public AppUser getUser(Long id) throws DoesntExistException {
+        if (!userRepository.existsById(id)) {
+            throw new DoesntExistException("User doesn't exist");
+        }
+        return userRepository.findById(id).get();
+    }
 }
