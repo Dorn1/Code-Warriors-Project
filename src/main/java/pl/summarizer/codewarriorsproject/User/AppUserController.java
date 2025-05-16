@@ -6,6 +6,7 @@ import pl.summarizer.codewarriorsproject.Exception.AlreadyExistsException;
 import pl.summarizer.codewarriorsproject.Exception.DoesntExistException;
 
 @RestController
+@CrossOrigin("*")
 public class AppUserController {
     AppUserService userService;
 
