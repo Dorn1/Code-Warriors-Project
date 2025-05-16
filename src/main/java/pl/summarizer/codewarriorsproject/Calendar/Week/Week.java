@@ -4,9 +4,12 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import pl.summarizer.codewarriorsproject.Calendar.Event.Event;
+import pl.summarizer.codewarriorsproject.Calendar.UserCalendar.UserCalendar;
 import pl.summarizer.codewarriorsproject.User.User;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,12 +19,12 @@ public class Week {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date startDate;
-    private Date endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 
     @OneToMany
-    private Set<Event> events;
+    private Set<Event> events = new HashSet<>();
 
     @ManyToOne
-    private User user;
+    private UserCalendar user;
 }

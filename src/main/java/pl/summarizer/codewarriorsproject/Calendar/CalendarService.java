@@ -4,13 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.summarizer.codewarriorsproject.Calendar.Event.Event;
 import pl.summarizer.codewarriorsproject.Calendar.Event.EventRepository;
+import pl.summarizer.codewarriorsproject.Calendar.UserCalendar.UserCalendar;
 import pl.summarizer.codewarriorsproject.Calendar.UserCalendar.UserCalendarRepository;
 import pl.summarizer.codewarriorsproject.Calendar.Week.Week;
 import pl.summarizer.codewarriorsproject.Calendar.Week.WeekRepository;
 import pl.summarizer.codewarriorsproject.Exception.TimeCollisionException;
+import pl.summarizer.codewarriorsproject.User.User;
 import pl.summarizer.codewarriorsproject.User.UserService;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Service
 public class CalendarService {
@@ -45,5 +48,31 @@ public class CalendarService {
         event.setStartTime(startTimer);
         event.setEndTime(endTimer);
         eventRepository.save(event);
+    }
+    public void addWeek(UserCalendar userCalendar,
+                        String startTime,
+                        String endTime){
+        Week week = new Week();
+        LocalDateTime startTimer = LocalDateTime.parse(startTime);
+        LocalDateTime endTimer = LocalDateTime.parse(endTime);
+        week.setStartDate(startTimer);
+        week.setEndDate(endTimer);
+        week.setUser(userCalendar);
+        weekRepository.save(week);
+
+    }
+    public Set<Event> getEvents(Week week){
+        return week.getEvents();
+    }
+    public Set<Week> getWeeks(UserCalendar userCalendar){
+        return userCalendar.getWeekSet();
+    }
+    public UserCalendar getUserCalendar(User user){
+        if(userCalendarRepository.getUserCalendarByUser(user).isEmpty()){
+            UserCalendar userCalendar = new UserCalendar();
+            userCalendar.setUser(user);
+            userCalendarRepository.save(userCalendar);
+        }
+        return userCalendarRepository.getUserCalendarByUser(user).stream().toList().getFirst();
     }
 }
