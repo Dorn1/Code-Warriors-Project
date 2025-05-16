@@ -3,21 +3,26 @@ package pl.summarizer.codewarriorsproject.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.summarizer.codewarriorsproject.Exception.AlreadyExistsException;
+import pl.summarizer.codewarriorsproject.Exception.DoesntExistException;
 
 @RestController
-public class UserController {
-    UserService userService;
+public class AppUserController {
+    AppUserService userService;
 
-    public UserController(UserService userService) {
+    public AppUserController(AppUserService userService) {
         this.userService = userService;
     }
 
     @GetMapping(value = "/login")
     public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
-        if(userService.login(username, password)) {
-            return ResponseEntity.ok(userService.getUserId(username).toString());
+        try {
+            if(userService.login(username, password)) {
+                return ResponseEntity.ok(userService.getUserId(username).toString());
+            }
+        } catch (DoesntExistException e) {
+            return ResponseEntity.status(401).body("Bad Credentials");
         }
-         return ResponseEntity.status(401).body("Bad Credentials");
+        return ResponseEntity.status(401).body("Bad Credentials");
     }
 
     @PostMapping(value = "/register")

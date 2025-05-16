@@ -7,15 +7,15 @@ import pl.summarizer.codewarriorsproject.Exception.DoesntExistException;
 
 
 @Service
-public class UserService {
+public class AppUserService {
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public AppUserService(AppUserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    UserRepository userRepository;
+    AppUserRepository userRepository;
     public void addUser(String username, String password) throws AlreadyExistsException {
-        User user = new User();
+        AppUser user = new AppUser();
         user.setUsername(username);
         user.setPassword(password);
         if(!userRepository.findByUsername(username).isEmpty()){
