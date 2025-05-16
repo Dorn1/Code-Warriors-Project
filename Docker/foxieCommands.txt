@@ -1,0 +1,1 @@
+docker build -t foxieProject .;docker run --name test -p 5431:5432 -v foxieVolume:/var/lib/postgresql/data foxieproject
