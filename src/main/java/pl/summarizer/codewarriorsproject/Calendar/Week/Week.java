@@ -6,8 +6,6 @@ import lombok.Setter;
 import pl.summarizer.codewarriorsproject.Calendar.Event.Event;
 import pl.summarizer.codewarriorsproject.User.User;
 
-import java.security.PrivateKey;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 
