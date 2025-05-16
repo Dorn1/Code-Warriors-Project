@@ -13,10 +13,10 @@ import pl.summarizer.codewarriorsproject.Chatbot.dto.ChatRequest;
 @CrossOrigin("*")
 public class ChatbotController {
 
-    private ChatClient chatClient;
+    private final ChatClient chatClient;
 
-    public ChatbotController(OllamaChatModel chatModel) {
-        this.chatClient = ChatClient.create(chatModel);
+    public ChatbotController(ChatClient chatClient) {
+        this.chatClient = chatClient;
     }
 
     @PostMapping
