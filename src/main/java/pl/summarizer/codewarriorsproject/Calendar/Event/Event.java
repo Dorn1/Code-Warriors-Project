@@ -2,14 +2,16 @@ package pl.summarizer.codewarriorsproject.Calendar.Event;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 import pl.summarizer.codewarriorsproject.Calendar.Week.Week;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Service
+@Setter
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,8 +19,8 @@ public class Event {
     private String title;
     private String description;
     private EventType eventType;
-    private Time startTime;
-    private Time endTime;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
     @ManyToOne
     private Week week;
