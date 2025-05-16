@@ -8,6 +8,10 @@ import pl.summarizer.codewarriorsproject.Exception.AlreadyExistsException;
 public class UserController {
     UserService userService;
 
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping(value = "/login")
     public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
         if(userService.login(username, password)) {

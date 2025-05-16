@@ -1,5 +1,6 @@
 package pl.summarizer.codewarriorsproject.User;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.summarizer.codewarriorsproject.Exception.AlreadyExistsException;
 import pl.summarizer.codewarriorsproject.Exception.DoesntExistException;
@@ -7,6 +8,11 @@ import pl.summarizer.codewarriorsproject.Exception.DoesntExistException;
 
 @Service
 public class UserService {
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     UserRepository userRepository;
     public void addUser(String username, String password) throws AlreadyExistsException {
         User user = new User();
