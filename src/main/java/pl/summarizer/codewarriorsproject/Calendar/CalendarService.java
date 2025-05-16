@@ -9,8 +9,8 @@ import pl.summarizer.codewarriorsproject.Calendar.UserCalendar.UserCalendarRepos
 import pl.summarizer.codewarriorsproject.Calendar.Week.Week;
 import pl.summarizer.codewarriorsproject.Calendar.Week.WeekRepository;
 import pl.summarizer.codewarriorsproject.Exception.TimeCollisionException;
-import pl.summarizer.codewarriorsproject.User.User;
-import pl.summarizer.codewarriorsproject.User.UserService;
+import pl.summarizer.codewarriorsproject.User.AppUser;
+import pl.summarizer.codewarriorsproject.User.AppUserService;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -20,9 +20,9 @@ public class CalendarService {
     EventRepository eventRepository;
     WeekRepository weekRepository;
     UserCalendarRepository userCalendarRepository;
-    UserService userService;
+    AppUserService userService;
     @Autowired
-    public CalendarService(EventRepository eventRepository, WeekRepository weekRepository, UserCalendarRepository userCalendarRepository, UserService userService) {
+    public CalendarService(EventRepository eventRepository, WeekRepository weekRepository, UserCalendarRepository userCalendarRepository, AppUserService userService) {
         this.eventRepository = eventRepository;
         this.weekRepository = weekRepository;
         this.userCalendarRepository = userCalendarRepository;
@@ -33,7 +33,7 @@ public class CalendarService {
                          String title,
                          String description,
                          String startTime,
-                         String endTime){
+                         String endTime) throws TimeCollisionException {
         LocalDateTime startTimer = LocalDateTime.parse(startTime);
         LocalDateTime endTimer = LocalDateTime.parse(endTime);
         for (Event event1 : week.getEvents()) {
@@ -67,7 +67,7 @@ public class CalendarService {
     public Set<Week> getWeeks(UserCalendar userCalendar){
         return userCalendar.getWeekSet();
     }
-    public UserCalendar getUserCalendar(User user){
+    public UserCalendar getUserCalendar(AppUser user){
         if(userCalendarRepository.getUserCalendarByUser(user).isEmpty()){
             UserCalendar userCalendar = new UserCalendar();
             userCalendar.setUser(user);
