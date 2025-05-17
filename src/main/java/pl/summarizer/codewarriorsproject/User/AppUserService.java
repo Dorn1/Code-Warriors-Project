@@ -32,4 +32,8 @@ public class AppUserService {
     public Long getUserId(String username) {
         return userRepository.findByUsername(username).getFirst().getId();
     }
+
+    public AppUser getUser(Long userId) {
+        return userRepository.findById(userId).get();
+    }
 }
