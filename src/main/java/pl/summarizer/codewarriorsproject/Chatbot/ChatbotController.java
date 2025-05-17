@@ -8,7 +8,7 @@ import pl.summarizer.codewarriorsproject.Chatbot.dto.ChatRequest;
 
 
 @RestController
-@RequestMapping("/dashboard/chatbot")
+@RequestMapping("/chatbot")
 @CrossOrigin("*")
 public class ChatbotController {
 
