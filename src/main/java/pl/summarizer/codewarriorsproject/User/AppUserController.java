@@ -32,6 +32,6 @@ public class AppUserController {
         } catch (AlreadyExistsException e) {
             return ResponseEntity.status(409).body(e.getMessage());
         }
-        return ResponseEntity.ok("User" + user + "registered successfully");
+        return ResponseEntity.ok("User " + user + " registered successfully");
     }
 }
