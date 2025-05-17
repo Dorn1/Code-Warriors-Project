@@ -1,5 +1,6 @@
 package pl.summarizer.codewarriorsproject.Calendar.Week;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.summarizer.codewarriorsproject.Calendar.Event.Event;
 import pl.summarizer.codewarriorsproject.Calendar.Event.EventType;
@@ -11,6 +12,14 @@ import java.util.Set;
 
 @Service
 public class WeekService {
+
+    private final WeekRepository weekRepository;
+
+    @Autowired
+    public WeekService(WeekRepository weekRepository) {
+        this.weekRepository = weekRepository;
+    }
+
     public HashMap<EventType, String> getWeekBalanceSuggestions(Set<Event> events) {
         HashMap<EventType, Duration> weekBalances = initWeekBalances();
 
@@ -85,5 +94,9 @@ public class WeekService {
         });
 
         return eventInbalances;
+    }
+
+    public Week createWeek(Week week) {
+        return weekRepository.save(week);
     }
 }
