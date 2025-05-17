@@ -12,6 +12,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/weeks")
+@CrossOrigin("*")
 public class WeekController {
 
     private final WeekService weekService;
