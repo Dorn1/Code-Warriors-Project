@@ -12,6 +12,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/weeks")
+@CrossOrigin("*")
 public class WeekController {
 
     private final WeekService weekService;
@@ -30,5 +31,11 @@ public class WeekController {
     public ResponseEntity<Week> createWeek(@RequestBody Week week) {
         Week createdWeek = weekService.createWeek(week);
         return new ResponseEntity<>(createdWeek, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Week> getWeekById(@PathVariable("id") Long id) {
+        Week week = weekService.getWeekById(id);
+        return new ResponseEntity<>(week, HttpStatus.OK);
     }
 }

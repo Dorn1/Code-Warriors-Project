@@ -11,6 +11,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/events")
+@CrossOrigin("*")
 public class EventController {
 
     private EventService eventService;
@@ -32,7 +33,13 @@ public class EventController {
         return new ResponseEntity<>(createdEvent, HttpStatus.CREATED);
     }
 
-    @GetMapping("suggest-event-time")
+    @DeleteMapping
+    public ResponseEntity<Event> deleteEvent(Long eventId, Long weekId) {
+        eventService.deleteEvent(eventId, weekId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/suggest-event-time")
     public ResponseEntity<String> getSuggestedEventTime(
             @RequestBody EventSuggestionRequest eventSuggestionRequest) {
         String suggestedEventTime = eventService.makeSchedulerPrompt(eventSuggestionRequest);

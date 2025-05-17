@@ -3,7 +3,9 @@ package pl.summarizer.codewarriorsproject.Calendar.Week;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.summarizer.codewarriorsproject.Calendar.Event.Event;
+import pl.summarizer.codewarriorsproject.Calendar.Event.EventRepository;
 import pl.summarizer.codewarriorsproject.Calendar.Event.EventType;
+import pl.summarizer.codewarriorsproject.Exception.ResourceNotFoundException;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -14,10 +16,12 @@ import java.util.Set;
 public class WeekService {
 
     private final WeekRepository weekRepository;
+    private final EventRepository eventRepository;
 
     @Autowired
-    public WeekService(WeekRepository weekRepository) {
+    public WeekService(WeekRepository weekRepository, EventRepository eventRepository) {
         this.weekRepository = weekRepository;
+        this.eventRepository = eventRepository;
     }
 
     public HashMap<EventType, String> getWeekBalanceSuggestions(Set<Event> events) {
@@ -97,6 +101,13 @@ public class WeekService {
     }
 
     public Week createWeek(Week week) {
-        return weekRepository.save(week);
+        week.getEvents().forEach(event -> event.setWeek(week));
+        return weekRepository.save(week); // This saves both the week and its events
+    }
+
+    public Week getWeekById(Long id) {
+        Week week = weekRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Week", "id", id));
+        return week;
     }
 }
