@@ -1,6 +1,5 @@
 package pl.summarizer.codewarriorsproject.Chatbot;
 
-import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +8,7 @@ import pl.summarizer.codewarriorsproject.Chatbot.dto.ChatRequest;
 
 
 @RestController
-@RequestMapping("/chatbot")
+@RequestMapping("/dashboard/chatbot")
 @CrossOrigin("*")
 public class ChatbotController {
 
