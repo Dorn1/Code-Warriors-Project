@@ -12,7 +12,7 @@ public class AppUserController {
     public AppUserController(AppUserService userService) {
         this.userService = userService;
     }
-
+    @CrossOrigin
     @GetMapping(value = "/login")
     public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
         try {
@@ -24,7 +24,7 @@ public class AppUserController {
         }
         return ResponseEntity.status(401).body("Bad Credentials");
     }
-
+    @CrossOrigin
     @PostMapping(value = "/register")
     public ResponseEntity<String> register(@RequestParam String user, @RequestParam String password) {
         try{

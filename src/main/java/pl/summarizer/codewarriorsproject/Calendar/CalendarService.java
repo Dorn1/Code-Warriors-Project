@@ -48,6 +48,8 @@ public class CalendarService {
         event.setStartTime(startTimer);
         event.setEndTime(endTimer);
         eventRepository.save(event);
+        week.getEvents().add(event);
+        weekRepository.save(week);
     }
     public void addWeek(UserCalendar userCalendar,
                         String startTime,
@@ -59,13 +61,9 @@ public class CalendarService {
         week.setEndDate(endTimer);
         week.setUser(userCalendar);
         weekRepository.save(week);
+        userCalendar.getWeekSet().add(week);
+        userCalendarRepository.save(userCalendar);
 
-    }
-    public Set<Event> getEvents(Week week){
-        return week.getEvents();
-    }
-    public Set<Week> getWeeks(UserCalendar userCalendar){
-        return userCalendar.getWeekSet();
     }
     public UserCalendar getUserCalendar(AppUser user){
         if(userCalendarRepository.getUserCalendarByUser(user).isEmpty()){

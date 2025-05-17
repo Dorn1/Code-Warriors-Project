@@ -18,7 +18,7 @@ public class ChatbotController {
     public ChatbotController(OllamaChatModel chatModel) {
         this.chatClient = ChatClient.create(chatModel);
     }
-
+    @CrossOrigin
     @PostMapping
     public ResponseEntity<String> getAnswer(@RequestBody ChatRequest request) {
 
