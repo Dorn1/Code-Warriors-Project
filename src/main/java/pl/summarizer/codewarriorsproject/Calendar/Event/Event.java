@@ -1,5 +1,6 @@
 package pl.summarizer.codewarriorsproject.Calendar.Event;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,5 +25,6 @@ public class Event {
     private LocalDateTime endTime;
 
     @ManyToOne
+    @JsonIgnore
     private Week week;
 }

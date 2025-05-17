@@ -32,6 +32,12 @@ public class EventController {
         return new ResponseEntity<>(createdEvent, HttpStatus.CREATED);
     }
 
+    @DeleteMapping
+    public ResponseEntity<Event> deleteEvent(Long eventId, Long weekId) {
+        eventService.deleteEvent(eventId, weekId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     @GetMapping("suggest-event-time")
     public ResponseEntity<String> getSuggestedEventTime(
             @RequestBody EventSuggestionRequest eventSuggestionRequest) {
