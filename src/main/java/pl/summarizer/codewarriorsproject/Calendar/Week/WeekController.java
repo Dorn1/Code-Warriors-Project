@@ -31,4 +31,10 @@ public class WeekController {
         Week createdWeek = weekService.createWeek(week);
         return new ResponseEntity<>(createdWeek, HttpStatus.CREATED);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Week> getWeekById(@PathVariable("id") Long id) {
+        Week week = weekService.getWeekById(id);
+        return new ResponseEntity<>(week, HttpStatus.OK);
+    }
 }
