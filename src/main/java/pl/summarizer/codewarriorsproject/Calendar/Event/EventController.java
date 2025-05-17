@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.summarizer.codewarriorsproject.Calendar.Week.Week;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/events")
@@ -28,5 +30,12 @@ public class EventController {
     public ResponseEntity<Event> addEvent(@RequestBody Event event, Long weekId) {
         Event createdEvent = eventService.createEvent(event, weekId);
         return new ResponseEntity<>(createdEvent, HttpStatus.CREATED);
+    }
+
+    @GetMapping("suggest-event-time")
+    public ResponseEntity<String> getSuggestedEventTime(
+            @RequestBody EventSuggestionRequest eventSuggestionRequest) {
+        String suggestedEventTime = eventService.makeSchedulerPrompt(eventSuggestionRequest);
+        return new ResponseEntity<>(suggestedEventTime, HttpStatus.OK);
     }
 }
