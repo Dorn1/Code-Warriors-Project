@@ -22,7 +22,7 @@ public class Week {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
-    @OneToMany(mappedBy = "week", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "week", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Set<Event> events = new HashSet<>();
 
     @ManyToOne

@@ -107,13 +107,15 @@ public class EventService {
     }
 
 
-    public void deleteEvent(Long eventId, Long weekId) {
-        Week week = weekRepository.findById(weekId)
-                .orElseThrow(() -> new ResourceNotFoundException("Week", "weekId", weekId));
-
+    public void deleteEvent(Long eventId) {
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new ResourceNotFoundException("Event", "eventId", eventId));
+
+        Week week = event.getWeek();
+        event.setWeek(null);
+        eventRepository.save(event);
         week.getEvents().remove(event);
+        weekRepository.save(week);
         eventRepository.delete(event);
     }
 }

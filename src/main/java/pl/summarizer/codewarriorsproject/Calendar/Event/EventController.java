@@ -33,9 +33,9 @@ public class EventController {
         return new ResponseEntity<>(createdEvent, HttpStatus.CREATED);
     }
 
-    @DeleteMapping
-    public ResponseEntity<Event> deleteEvent(Long eventId, Long weekId) {
-        eventService.deleteEvent(eventId, weekId);
+    @DeleteMapping("/deleteEvent")
+    public ResponseEntity<Event> deleteEvent(@RequestParam Long eventId) {
+        eventService.deleteEvent(eventId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
